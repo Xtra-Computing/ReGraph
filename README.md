@@ -33,7 +33,7 @@ You can also specify which SLR you want to put kernels in, and which banks you w
 
 After configurations, run `make autogen` to generate the synthesizable accelerators and the connectivity files. Below is a detailed example to config 11 little pipelines and 3 big pipelines. 
 
-Step 1 (MUST DO) modify the `./global_para.mk`: specify the number of each kind of pipelines
+**Step 1 (MUST DO)**: modify the `./global_para.mk`: specify the number of each kind of pipelines
 ```makefile
 #Little kernel setup 
 LITTLE_KERNEL_NUM=11
@@ -45,7 +45,7 @@ BIG_KERNEL_DST_BUFFER_SIZE=524288
 #################################################################################################################
 ```
 
-Step 2 (OPTIONAL) modify the `./autogen/autogen.py`: config slr id and hbm id. Kindly note HBM bank 30 of U280 and HBM bank 27 of U50 are reserved for outdegree, please avoid using these two banks. For U280, we recommend you use HBM bank 0 to 29, for U50, we recommend you use HBM bank 0 to 26. To have better timing and avoid routing congestion, please assign the kernels evenly among SLRs.
+**Step 2 (OPTIONAL)**: modify the `./autogen/autogen.py`: config slr id and hbm id. Kindly note HBM bank 30 of U280 and HBM bank 27 of U50 are reserved for outdegree, please avoid using these two banks. For U280, we recommend you use HBM bank 0 to 29, for U50, we recommend you use HBM bank 0 to 26. To have better timing and avoid routing congestion, please assign the kernels evenly among SLRs.
 ```python
 # configurable hbm wrapper bank id (for vertex properties)
 #                         little pipeline vetex properties     |   big pipeline vetex properties
