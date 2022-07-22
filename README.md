@@ -10,7 +10,7 @@ The Figure above shows the overview of the ReGraph workflow. To obtain a custumi
 With ReGraph, users can implement different graph accelerators by only writing three high-level functions: `accScatter()`, `accGather()` and `accApply()`. By default, we provide you three build-in graph algorithms, PageRank (PR), Breadth-First Search (BFS) and Closeness Centrality (CC) as examples. The desired application can be compiled by passing argument ```APP=[the algorithm]``` to ``` make ``` command.
 
 ## Accelerator generation
-The number of little pipelines and big pipelines are configuratble. You can change them in `./global_para.mk` by modifying `LITTLE_KERNEL_NUM` and `BIG_KERNEL_NUM`. Please note, due to the limited memory ports, for U280, the total number of pipelines, i.e., `LITTLE_KERNEL_NUM + BIG_KERNEL_NUM` should not exceed 14, for U50, the total number of pipelines should not exceed 13. 
+The number of little pipelines and big pipelines are configurable. You can change them in `./global_para.mk` by modifying `LITTLE_KERNEL_NUM` and `BIG_KERNEL_NUM`. Please note, due to the limited memory ports, for U280, the total number of pipelines, i.e., `LITTLE_KERNEL_NUM + BIG_KERNEL_NUM` should not exceed 14, for U50, the total number of pipelines should not exceed 13. 
 
 You can also specify which SLR you want to put kernels in, and which banks you want to let each kernel access, in the file `./autogen/autogen.py`. There are three configurable variables: `apply_kernel_hbm_id`, `all_kernels_slr_id` and `all_kernels_hbm_id`. Please note, due to limited URAMs, for U50, the `LITTLE_KERNEL_DST_BUFFER_SIZE` and `BIG_KERNEL_DST_BUFFER_SIZE` should be reduced by half, i.e., 32768 and 262144, respectively.
 
