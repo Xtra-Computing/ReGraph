@@ -9,7 +9,7 @@ TBD
 ![image](./img/overview.png)
 
 
-The Figure above shows the overview of the ReGraph workflow. 
+The Figure above shows the overview of ReGraph workflow. 
 
 * **Step 1**: To obtain a custumized accelerator design for a graph application, developers only need to **write user-defined functions (UDFs)** of three stages of a GAS model with the provided programminginterface. 
 * **Step 2**: ReGraph then takes the UDFs, accelerator templates and platform specific optimizations to **generate a set of synthesizable codes for accelerators** with all possible pipeline combinations. 
