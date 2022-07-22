@@ -15,9 +15,9 @@ Step 1: To obtain a custumized accelerator design for a graph application, devel
 
 Step 2: ReGraph then takes the UDFs, accelerator templates and platform specific optimizations to **generate a set of synthesizable codes for accelerators** with all possible pipeline combinations. 
 
-Step 3: The synthesizable codes are compiled to bitstreams using the Xilinx Vitis toolchain. After that, users **assign the graph for acceleration** (Step 3). 
+Step 3: The synthesizable codes are compiled to bitstreams using the Xilinx Vitis toolchain. After that, users **assign the graph for acceleration**. 
 
-Step 4: ReGraph reorders vertices based on their in-degrees and partitions the graph.  Then, the task scheduler with the built-in graph-aware task scheduling method **selects the accelerator** with the most suitable numbers of Big and Little pipelines and **generates the scheduling plan** (Step 4).
+Step 4: ReGraph reorders vertices based on their in-degrees and partitions the graph.  Then, the task scheduler with the built-in graph-aware task scheduling method **selects the accelerator** with the most suitable numbers of Big and Little pipelines and **generates the scheduling plan**.
 
 Step 5: ReGraph deploys the selected accelerator and **runs on the target FPGA**.
 
