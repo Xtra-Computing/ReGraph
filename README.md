@@ -10,10 +10,15 @@ TBD
 
 
 The Figure above shows the overview of the ReGraph workflow. 
+
 Step 1: To obtain a custumized accelerator design for a graph application, developers only need to **write user-defined functions (UDFs)** of three stages of a GAS model with the provided programminginterface. 
+
 Step 2: ReGraph then takes the UDFs, accelerator templates and platform specific optimizations to **generate a set of synthesizable codes for accelerators** with all possible pipeline combinations. 
+
 Step 3: The synthesizable codes are compiled to bitstreams using the Xilinx Vitis toolchain. After that, users **assign the graph for acceleration** (Step 3). 
+
 Step 4: ReGraph reorders vertices based on their in-degrees and partitions the graph.  Then, the task scheduler with the built-in graph-aware task scheduling method **selects the accelerator** with the most suitable numbers of Big and Little pipelines and **generates the scheduling plan** (Step 4).
+
 Step 5: ReGraph deploys the selected accelerator and **runs on the target FPGA**.
 
 
