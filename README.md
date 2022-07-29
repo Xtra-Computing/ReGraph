@@ -107,7 +107,7 @@ Because the dataset is too large, we only provide the dataset generator. Run the
 ```sh
 $ git clone https://path/to/github/repo.git
 $ cd ./ReGraph
-# config num of little pipelimes (LITTLE_KERNEL_NUM) and num of little pipelimes (BIG_KERNEL_NUM)
+# config num of little pipelines (LITTLE_KERNEL_NUM) and num of little pipelines (BIG_KERNEL_NUM)
 $ vim global_para.mk
 # assign slrs and hbm banks for each kernel 
 $ vim ./autogen/autogen.py
