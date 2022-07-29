@@ -19,9 +19,9 @@ fi
 
 echo "$1 $2"
 
-cp -r pax_hbmw_v2.2  pax_hbmw_v2.2_$1v$2
+cp -r ../ReGraph  ../ReGraph$1v$2
 
-cd pax_hbmw_v2.2_$1v$2
+cd ../ReGraph$1v$2
 
 make cleanall
 
