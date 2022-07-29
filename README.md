@@ -1,5 +1,9 @@
 # ReGraph: Scaling Graph Processing on HBM-enabled FPGAs with Heterogeneous Pipelines
 
+
+[![DOI](https://zenodo.org/badge/516650181.svg)](https://zenodo.org/badge/latestdoi/516650181)
+
+
 ## What's new?
 TBD
 
