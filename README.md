@@ -1,22 +1,38 @@
 # ReGraph: Scaling Graph Processing on HBM-enabled FPGAs with Heterogeneous Pipelines
 
+
+[![DOI](https://zenodo.org/badge/516650181.svg)](https://zenodo.org/badge/latestdoi/516650181)
+
+
+## What's new?
+TBD
+
+## Overview
+
+
 ![image](./img/overview.png)
 
 
-## Overview
-The Figure above shows the overview of the ReGraph workflow. To obtain a custumized accelerator design for a graph application, developers only need to **write user-defined functions (UDFs)** of three stages of a GAS model with the provided programminginterface (Step 1). ReGraph then takes the UDFs, accelerator templates and platform specific optimizations to **generate a set of synthesizable codes for accelerators** with all possible pipeline combinations (Step 2). The synthesizable codes are compiled to bitstreams using the Xilinx Vitis toolchain. After that, users **assign the graph for acceleration** (Step 3). ReGraph reorders vertices based on their in-degrees and partitions the graph.  Then, the task scheduler with the built-in graph-aware task scheduling method **selects the accelerator** with the most suitable numbers of Big and Little pipelines and **generates the scheduling plan** (Step 4). ReGraph deploys the selected accelerator and **runs on the target FPGA** (Step 5).
+The Figure above shows the overview of ReGraph workflow. 
+
+* **Step 1**: To obtain a custumized accelerator design for a graph application, developers only need to **write user-defined functions (UDFs)** of three stages of a GAS model with the provided programminginterface. 
+* **Step 2**: ReGraph then takes the UDFs, accelerator templates and platform specific optimizations to **generate a set of synthesizable codes for accelerators** with all possible pipeline combinations. 
+* **Step 3**: The synthesizable codes are compiled to bitstreams using the Xilinx Vitis toolchain. After that, users **assign the graph for acceleration**. 
+* **Step 4**: ReGraph reorders vertices based on their in-degrees and partitions the graph.  Then, the task scheduler with the built-in graph-aware task scheduling method **selects the accelerator** with the most suitable numbers of Big and Little pipelines and **generates the scheduling plan**.
+* **Step 5**: ReGraph deploys the selected accelerator and **runs on the target FPGA**.
+
 
 ## Programming Interface
 With ReGraph, users can implement different graph accelerators by only writing three high-level functions: `accScatter()`, `accGather()` and `accApply()`. By default, we provide you three build-in graph algorithms, PageRank (PR), Breadth-First Search (BFS) and Closeness Centrality (CC) as examples. The desired application can be compiled by passing argument ```APP=[the algorithm]``` to ``` make ``` command.
 
 ## Accelerator generation
-The number of little pipelines and big pipelines are configuratble. You can change them in `./global_para.mk` by modifying `LITTLE_KERNEL_NUM` and `BIG_KERNEL_NUM`. Please note, due to the limited memory ports, for U280, the total number of pipelines, i.e., `LITTLE_KERNEL_NUM + BIG_KERNEL_NUM` should not exceed 14, for U50, the total number of pipelines should not exceed 13. 
+The number of little pipelines and big pipelines are configurable. You can change them in `./global_para.mk` by modifying `LITTLE_KERNEL_NUM` and `BIG_KERNEL_NUM`. Please note, due to the limited memory ports, for U280, the total number of pipelines, i.e., `LITTLE_KERNEL_NUM + BIG_KERNEL_NUM` should not exceed 14, for U50, the total number of pipelines should not exceed 13. 
 
 You can also specify which SLR you want to put kernels in, and which banks you want to let each kernel access, in the file `./autogen/autogen.py`. There are three configurable variables: `apply_kernel_hbm_id`, `all_kernels_slr_id` and `all_kernels_hbm_id`. Please note, due to limited URAMs, for U50, the `LITTLE_KERNEL_DST_BUFFER_SIZE` and `BIG_KERNEL_DST_BUFFER_SIZE` should be reduced by half, i.e., 32768 and 262144, respectively.
 
 After configurations, run `make autogen` to generate the synthesizable accelerators and the connectivity files. Below is a detailed example to config 11 little pipelines and 3 big pipelines. 
 
-Step 1 (MUST DO) modify the `./global_para.mk`: specify the number of each kind of pipelines
+**Step 1 (MUST DO)**: modify the `./global_para.mk`: specify the number of each kind of pipelines
 ```makefile
 #Little kernel setup 
 LITTLE_KERNEL_NUM=11
@@ -28,7 +44,7 @@ BIG_KERNEL_DST_BUFFER_SIZE=524288
 #################################################################################################################
 ```
 
-Step 2 (OPTIONAL) modify the `./autogen/autogen.py`: config slr id and hbm id. Kindly note HBM bank 30 of U280 and HBM bank 27 of U50 are reserved for outdegree, please avoid using these two banks. For U280, we recommend you use HBM bank 0 to 29, for U50, we recommend you use HBM bank 0 to 26. To have better timing and avoid routing congestion, please assign the kernels evenly among SLRs.
+**Step 2 (OPTIONAL)**: modify the `./autogen/autogen.py`: config slr id and hbm id. Kindly note HBM bank 30 of U280 and HBM bank 27 of U50 are reserved for outdegree, please avoid using these two banks. For U280, we recommend you use HBM bank 0 to 29, for U50, we recommend you use HBM bank 0 to 26. To have better timing and avoid routing congestion, please assign the kernels evenly among SLRs.
 ```python
 # configurable hbm wrapper bank id (for vertex properties)
 #                         little pipeline vetex properties     |   big pipeline vetex properties
