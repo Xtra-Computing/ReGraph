@@ -1,7 +1,7 @@
 #!/bin/sh
 echo > ./timing_report.txt
 
-for dir in `ls ./`; do                  
+for dir in `ls ../`; do                  
     if [ -d $dir ] 
     then
 	cd $dir;
