@@ -79,8 +79,11 @@ int main(int argc, char **argv) {
     DEBUG_PRINTF("Partitioning graph...\n");
     partition_container_dt partition_container = partitionGraph(csr);
     //********************************************************************************************************//
-
-    int numD = atoi(argv[3]);
+    
+    int numD = 1;
+        
+    if(argc > 3) numD = atoi(argv[3]);
+     
     partition_container.num_dense_partitions = numD;
     // if(partition_container.num_dense_partitions > partition_container.num_partitions) return 1;
     //******************************* Schedule Partitions to kernels *****************************************//
