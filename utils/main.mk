@@ -15,7 +15,6 @@ include $(UTILS_PATH)/utils.mk
 
 include global_para.mk
 
-include $(APPCONFIG)/config.mk
 include $(APPCONFIG)/build.mk
 include ./host/host.mk
 
